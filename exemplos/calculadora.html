@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Básica</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 400px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f0f0f0;
+        }
+        
+        .calculadora {
+            background-color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        
+        .campo {
+            margin-bottom: 15px;
+        }
+        
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #555;
+            font-weight: bold;
+        }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            font-size: 16px;
+            border: 2px solid #ddd;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        
+        .botoes {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+            margin: 20px 0;
+        }
+        
+        button {
+            padding: 15px;
+            font-size: 20px;
+            font-weight: bold;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        button:hover {
+            background-color: #45a049;
+        }
+        
+        button:active {
+            transform: scale(0.95);
+        }
+        
+        #resultado {
+            background-color: #f9f9f9;
+            font-weight: bold;
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="calculadora">
+        <h1>Calculadora Básica</h1>
+        
+        <div class="campo">
+            <label for="numero1">Primeiro Número:</label>
+            <input type="number" id="numero1" placeholder="Digite o primeiro número">
+        </div>
+        
+        <div class="campo">
+            <label for="numero2">Segundo Número:</label>
+            <input type="number" id="numero2" placeholder="Digite o segundo número">
+        </div>
+        
+        <div class="botoes">
+            <button onclick="somar()">+</button>
+            <button onclick="subtrair()">-</button>
+            <button onclick="multiplicar()">×</button>
+            <button onclick="dividir()">÷</button>
+        </div>
+        
+        <div class="campo">
+            <label for="resultado">Resultado:</label>
+            <input type="text" id="resultado" readonly placeholder="O resultado aparecerá aqui">
+        </div>
+    </div>
+
+    <script>
+        // Função para somar
+        function somar() {
+            // Pega o valor do primeiro número
+            var num1 = document.getElementById('numero1').value;
+            // Pega o valor do segundo número
+            var num2 = document.getElementById('numero2').value;
+            
+            // Converte os valores de texto para número e soma
+            var resultado = Number(num1) + Number(num2);
+            
+            // Mostra o resultado no campo de resultado
+            document.getElementById('resultado').value = resultado;
+        }
+        
+        // Função para subtrair
+        function subtrair() {
+            var num1 = document.getElementById('numero1').value;
+            var num2 = document.getElementById('numero2').value;
+            
+            var resultado = Number(num1) - Number(num2);
+            
+            document.getElementById('resultado').value = resultado;
+        }
+        
+        // Função para multiplicar
+        function multiplicar() {
+            var num1 = document.getElementById('numero1').value;
+            var num2 = document.getElementById('numero2').value;
+            
+            var resultado = Number(num1) * Number(num2);
+            
+            document.getElementById('resultado').value = resultado;
+        }
+        
+        // Função para dividir
+        function dividir() {
+            var num1 = document.getElementById('numero1').value;
+            var num2 = document.getElementById('numero2').value;
+            
+            // Verifica se está tentando dividir por zero
+            if (Number(num2) === 0) {
+                document.getElementById('resultado').value = 'Erro: Divisão por zero!';
+            } else {
+                var resultado = Number(num1) / Number(num2);
+                document.getElementById('resultado').value = resultado;
+            }
+        }
+    </script>
+</body>
+</html>
