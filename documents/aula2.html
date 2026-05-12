@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Aula 2 - JavaScript e Formulários</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+        }
+        .cronograma {
+            background-color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid #bdc3c7;
+            padding: 10px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        code {
+            background-color: #2c3e50;
+            color: #e74c3c;
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 8px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .exemplo {
+            background-color: white;
+            border-left: 4px solid #3498db;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 4px;
+        }
+        .dica {
+            background-color: #fef9e7;
+            border-left: 4px solid #f39c12;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        .exercicio {
+            background-color: #e8f8f5;
+            border-left: 4px solid #27ae60;
+            padding: 15px;
+            margin: 20px 0;
+        }
+        button {
+            background-color: #3498db;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #2980b9;
+        }
+    </style>
+</head>
+<body>
+    <h1>🎯 Aula 2: JavaScript e Formulários HTML</h1>
+    <p><strong>Objetivo:</strong> Aprender a selecionar elementos HTML, capturar valores de formulários, responder a eventos e modificar dinamicamente o conteúdo da página.</p>
+
+    <div class="cronograma">
+        <h3>⏱ Cronograma (105 minutos)</h3>
+        <table>
+            <tr><th>Duração</th><th>Atividade</th></tr>
+            <tr><td>0:00 – 0:15</td><td>Revisão rápida e introdução ao DOM</td></tr>
+            <tr><td>0:15 – 0:35</td><td>Selecionando elementos e lendo valores</td></tr>
+            <tr><td>0:35 – 0:55</td><td>Exercício guiado 1 – Calculadora simples</td></tr>
+            <tr><td>0:55 – 1:10</td><td>Eventos (onclick, oninput) e escrita em elementos</td></tr>
+            <tr><td>1:10 – 1:30</td><td>Exercício prático – Validador de formulário</td></tr>
+            <tr><td>1:30 – 1:45</td><td>Correção, dicas e desafio para casa</td></tr>
+        </table>
+    </div>
+
+    <h2>1. 🔁 Revisão rápida (5 min)</h2>
+    <ul>
+        <li>Variáveis, <code>prompt</code>, <code>console.log</code>, <code>if/else</code></li>
+        <li><strong>Problema:</strong> <code>prompt</code> é feio e limitado. Queremos interagir com a página de verdade!</li>
+        <li><strong>Solução:</strong> JavaScript vai manipular <strong>formulários HTML</strong>.</li>
+    </ul>
+
+    <h2>2. 🌳 Introdução ao DOM (10 min)</h2>
+    <p><strong>DOM = Document Object Model</strong><br>É uma representação dos elementos HTML que o JavaScript consegue enxergar e modificar.</p>
+    <div class="exemplo">
+        <h4>Estrutura básica de um formulário HTML:</h4>
+        <pre><code>&lt;input type="text" id="nome" placeholder="Digite seu nome"&gt;
+&lt;button id="btnEnviar"&gt;Enviar&lt;/button&gt;
+&lt;div id="resultado"&gt;&lt;/div&gt;</code></pre>
+    </div>
+
+    <h2>3. 🎣 Selecionando elementos e lendo valores (20 min)</h2>
+    <h3>3.1 Selecionar por <code>id</code></h3>
+    <pre><code>let campoNome = document.getElementById("nome");
+let botao = document.getElementById("btnEnviar");
+let divResultado = document.getElementById("resultado");</code></pre>
+
+    <h3>3.2 Ler valor de um <code>input</code></h3>
+    <pre><code>let valorDigitado = campoNome.value;
+console.log(valorDigitado);</code></pre>
+
+    <h3>3.3 Escrever dentro de um elemento HTML</h3>
+    <pre><code>divResultado.innerHTML = "Olá, " + valorDigitado;</code></pre>
+
+    <h3>3.4 Evento de clique (<code>onclick</code>)</h3>
+    <pre><code>botao.onclick = function() {
+    let nome = campoNome.value;
+    divResultado.innerHTML = `Olá ${nome}! Bem-vindo(a).`;
+};</code></pre>
+
+    <div class="exemplo">
+        <h4>🧪 Exemplo completo:</h4>
+        <pre><code>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+    &lt;title&gt;Exemplo DOM&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h2&gt;Digite seu nome:&lt;/h2&gt;
+    &lt;input type="text" id="nome"&gt;
+    &lt;button id="botao"&gt;Clique&lt;/button&gt;
+    &lt;div id="mensagem"&gt;&lt;/div&gt;
+
+    &lt;script&gt;
+        let inputNome = document.getElementById("nome");
+        let botao = document.getElementById("botao");
+        let divMensagem = document.getElementById("mensagem");
+
+        botao.onclick = function() {
+            let nome = inputNome.value;
+            divMensagem.innerHTML = `&lt;strong&gt;Olá ${nome}!&lt;/strong&gt;`;
+        };
+    &lt;/script&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+    </div>
+
+    <h2>4. 🧮 Exercício guiado 1 – Calculadora Simples (20 min)</h2>
+    <p><strong>Objetivo:</strong> Criar uma calculadora que soma dois números e exibe o resultado em um <code>div</code>.</p>
+
+    <div class="exercicio">
+        <h4>📝 Estrutura HTML:</h4>
+        <pre><code>&lt;input type="number" id="num1" placeholder="Primeiro número"&gt;
+&lt;input type="number" id="num2" placeholder="Segundo número"&gt;
+&lt;button id="somar"&gt;Somar&lt;/button&gt;
+&lt;div id="resultado"&gt;&lt;/div&gt;</code></pre>
+
+        <h4>💻 Código JavaScript:</h4>
+        <pre><code>let n1 = document.getElementById("num1");
+let n2 = document.getElementById("num2");
+let botaoSomar = document.getElementById("somar");
+let divResultado = document.getElementById("resultado");
+
+botaoSomar.onclick = function() {
+    let valor1 = Number(n1.value);
+    let valor2 = Number(n2.value);
+    let soma = valor1 + valor2;
+    
+    divResultado.innerHTML = `A soma é: ${soma}`;
+};</code></pre>
+    </div>
+
+    <div class="dica">
+        <strong>🔥 Desafio rápido:</strong> Adicionar botões para subtração, multiplicação e divisão.
+    </div>
+
+    <h2>5. ⚡ Eventos adicionais e escrita em componentes (15 min)</h2>
+    <h3>5.1 Evento <code>oninput</code> (enquanto digita)</h3>
+    <pre><code>n1.oninput = function() {
+    console.log("Valor mudou para:", n1.value);
+};</code></pre>
+
+    <h3>5.2 Escrever em outros elementos</h3>
+    <ul>
+        <li><code>span</code>: texto inline</li>
+        <li><code>p</code>: parágrafo</li>
+        <li><code>h3</code>: título pequeno</li>
+    </ul>
+
+    <h3>5.3 Limpar campos após operação</h3>
+    <pre><code>n1.value = "";   // limpa o campo
+n2.value = "";</code></pre>
+
+    <h3>5.4 Validar se campos estão vazios</h3>
+    <pre><code>if (n1.value === "" || n2.value === "") {
+    alert("Preencha os dois números!");
+    return;   // para a execução
+}</code></pre>
+
+    <h2>6. ✅ Exercício prático – Validador de Formulário (20 min)</h2>
+    <p><strong>Enunciado:</strong> Criar um formulário de cadastro simples com validação JavaScript.</p>
+
+    <div class="exercicio">
+        <h4>Campos:</h4>
+        <ul>
+            <li>Nome (obrigatório, mínimo 3 caracteres)</li>
+            <li>E-mail (obrigatório, deve conter "@")</li>
+            <li>Idade (obrigatório, entre 1 e 120)</li>
+        </ul>
+
+        <h4>Comportamento:</h4>
+        <ul>
+            <li>Ao clicar em "Validar", exibir mensagens de erro específicas</li>
+            <li>Se tudo estiver correto, mostrar "Cadastro válido!" em verde</li>
+        </ul>
+
+        <h4>🔧 Estrutura HTML sugerida:</h4>
+        <pre><code>&lt;label&gt;Nome:&lt;/label&gt;
+&lt;input type="text" id="nome"&gt;
+&lt;span id="erroNome" style="color:red"&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;E-mail:&lt;/label&gt;
+&lt;input type="email" id="email"&gt;
+&lt;span id="erroEmail" style="color:red"&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;label&gt;Idade:&lt;/label&gt;
+&lt;input type="number" id="idade"&gt;
+&lt;span id="erroIdade" style="color:red"&gt;&lt;/span&gt;&lt;br&gt;
+
+&lt;button id="validar"&gt;Validar&lt;/button&gt;
+&lt;div id="resultadoValidacao"&gt;&lt;/div&gt;</code></pre>
+
+        <h4>✅ Resolução (código completo):</h4>
+        <pre><code>let nome = document.getElementById("nome");
+let email = document.getElementById("email");
+let idade = document.getElementById("idade");
+let btnValidar = document.getElementById("validar");
+let resultadoDiv = document.getElementById("resultadoValidacao");
+
+let erroNome = document.getElementById("erroNome");
+let erroEmail = document.getElementById("erroEmail");
+let erroIdade = document.getElementById("erroIdade");
+
+btnValidar.onclick = function() {
+    // Limpar mensagens anteriores
+    erroNome.innerHTML = "";
+    erroEmail.innerHTML = "";
+    erroIdade.innerHTML = "";
+    resultadoDiv.innerHTML = "";
+    let valido = true;
+    
+    // Validar nome
+    if (nome.value.length < 3) {
+        erroNome.innerHTML = "Nome deve ter pelo menos 3 caracteres";
+        valido = false;
+    }
+    
+    // Validar e-mail
+    if (email.value.indexOf("@") === -1) {
+        erroEmail.innerHTML = "E-mail deve conter @";
+        valido = false;
+    }
+    
+    // Validar idade
+    let idadeNum = Number(idade.value);
+    if (idade.value === "" || idadeNum < 1 || idadeNum > 120) {
+        erroIdade.innerHTML = "Idade deve ser entre 1 e 120";
+        valido = false;
+    }
+    
+    // Mensagem final
+    if (valido) {
+        resultadoDiv.innerHTML = "✅ Cadastro válido!";
+        resultadoDiv.style.color = "green";
+    } else {
+        resultadoDiv.innerHTML = "❌ Corrija os erros acima";
+        resultadoDiv.style.color = "red";
+    }
+};</code></pre>
+    </div>
+
+    <h2>7. 📦 Encerramento e desafio para casa (15 min)</h2>
+    <div class="dica">
+        <h3>Recapitulação:</h3>
+        <ul>
+            <li><code>document.getElementById("id")</code> → seleciona elemento</li>
+            <li><code>.value</code> → pega conteúdo do input</li>
+            <li><code>.innerHTML</code> → escreve dentro de um elemento</li>
+            <li>Eventos: <code>onclick</code>, <code>oninput</code></li>
+            <li><code>Number()</code> para converter string em número</li>
+        </ul>
+    </div>
+
+    <div class="exercicio">
+        <h3>🔨 Desafio para casa:</h3>
+        <p>Criar um <strong>conversor de moedas</strong> (Real → Dólar) com:</p>
+        <ul>
+            <li>Campo para valor em R$</li>
+            <li>Campo para cotação do dólar (fixo ou editável)</li>
+            <li>Botão "Converter"</li>
+            <li>Exibir resultado em <code>div</code></li>
+            <li>Validar se campos não estão vazios</li>
+        </ul>
+    </div>
+
+    <h2>📚 Material complementar</h2>
+    <ul>
+        <li><a href="https://developer.mozilla.org/pt-BR/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents" target="_blank">MDN – Manipulando o DOM</a></li>
+        <li><a href="https://www.w3schools.com/js/js_events.asp" target="_blank">Eventos JavaScript – W3Schools</a></li>
+    </ul>
+
+    <hr>
+    <p style="text-align: center; color: #7f8c8d;">Boa aula! 🚀</p>
+</body>
+</html>
